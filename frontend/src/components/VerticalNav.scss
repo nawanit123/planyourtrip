@@ -1,0 +1,20 @@
+.VerticalNav {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  border: 2px solid #4cb2f5;
+  border-radius: 0rem 0rem 0.5rem 0.5rem;
+  background-color: #4cb2f5;
+  color: white;
+  a {
+    line-height: 2.5rem;
+    color: inherit;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+
+    i {
+      font-size: 2rem;
+    }
+  }
+}

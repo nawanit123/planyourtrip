@@ -1,0 +1,8 @@
+.Header {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+
+  &__jumbo {
+    margin: 5rem;
+  }
+}
