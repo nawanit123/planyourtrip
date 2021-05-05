@@ -1,4 +1,9 @@
+@import '../Design_Tokens/variables';
+
 .Footer {
-  background-color: #4cb2f5;
+  background-color: $color-nav-primary;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

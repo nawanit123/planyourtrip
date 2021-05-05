@@ -1,17 +1,18 @@
+@import '../Design_Tokens/_variables.scss';
+
 .Navigation {
   font-size: 2rem;
   width: 100%;
   padding: 1rem;
-  background: #4cb2f5 !important; /* fallback for old browsers */
+  background: $color-nav-primary !important; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #b06ab3,
-    #4cb2f5
+    $color-nav-secondary $color-nav-primary
   ) !important; /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to left,
-    #b06ab3,
-    #4cb2f5
+    $color-nav-secondary,
+    $color-nav-primary
   ) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   &__Brand {
     font-size: inherit;
