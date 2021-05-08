@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Navbar } from 'react-bootstrap';
 import './Navigation.scss';
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="Navigation">
       <Container>

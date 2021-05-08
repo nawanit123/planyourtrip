@@ -2,7 +2,7 @@ import React from 'react';
 import { Nav } from 'react-bootstrap';
 import './VerticalNav.scss';
 
-const VerticalNav = () => {
+const VerticalNav: React.FC = () => {
   return (
     <Nav className="VerticalNav">
       <Nav.Link href="#home">

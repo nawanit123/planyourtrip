@@ -1,7 +1,7 @@
 import React from 'react';
 import './Additional.scss';
 
-const Additional = () => {
+const Additional: React.FC = () => {
   return (
     <div className="Additional">
       <hr />

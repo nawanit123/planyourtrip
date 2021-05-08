@@ -1,15 +1,17 @@
 import React from 'react';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Additional from '../components/Additional';
+import Navigation from '../components/Navigation';
+import Content from '../components/Content';
 
 const Homepage = () => {
   return (
-    <>
-      <Header />
+    <div className="Homepage">
+      <Navigation />
+      <Content />
       <Additional />
       <Footer />
-    </>
+    </div>
   );
 };
 export default Homepage;
