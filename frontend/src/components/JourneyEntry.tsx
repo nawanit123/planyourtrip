@@ -1,120 +1,97 @@
-import React, { useState } from 'react';
-import { Col, Form, Button } from 'react-bootstrap';
+import React from 'react';
+import { Col, Form } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-interface checkboxes {
-  hotel: boolean;
-  train: boolean;
-  cab: boolean;
+interface Props {
+  entry: any;
+  index: number;
+  handleChange: Function;
+  handleDate: Function;
 }
 
-const JourneyEntry: React.FC = () => {
-  const [state, setState] = useState<{ source: string; destination: string }>({
-    source: 'Mumbai',
-    destination: 'Bangalore',
-  });
-
-  const [isChecked, setIsChecked] = useState<checkboxes>({
-    hotel: false,
-    train: false,
-    cab: false,
-  });
-  const [departure, setDeparture] = useState(new Date());
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-    setState({
-      ...state,
-      [e.target.name]: value,
-    });
-  };
-  const toggleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });
-  };
-
-  const submitHandler = () => {};
-
+const JourneyEntry: React.FC<Props> = ({
+  entry,
+  index,
+  handleChange,
+  handleDate,
+}) => {
   return (
-    <Form className="JourneyEntry" onSubmit={submitHandler}>
-      <Form.Row>
-        <Form.Group as={Col} className="Journey__source">
-          <Form.Label>From</Form.Label>
-          <br />
-          <Form.Control
-            as="select"
-            className="Journey__source__name"
-            name="source"
-            value={state.source}
-            onChange={handleChange}
-            size="lg"
-          >
-            <option>Mumbai</option>
-            <option>Delhi</option>
-            <option>Bangalore</option>
-          </Form.Control>
-          <br />
-        </Form.Group>
-        <Form.Group as={Col} className="Journey__destination">
-          <Form.Label>To</Form.Label>
-          <br />
-          <Form.Control
-            as="select"
-            className="Journey__destination__name"
-            name="destination"
-            value={state.destination}
-            onChange={handleChange}
-            size="lg"
-          >
-            <option>Mumbai</option>
-            <option>Delhi</option>
-            <option>Bangalore</option>
-          </Form.Control>
-          <br />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Departure</Form.Label>
-          <br />
-          <DatePicker
-            dateFormat="dd/MM/yyyy"
-            selected={departure}
-            onChange={(date: Date) => setDeparture(date)}
-          />
-        </Form.Group>
-        <Form.Group className="ml-5">
-          <Form.Label>Hotel</Form.Label>
-          <br />
-          <Form.Check
-            type="checkbox"
-            name="hotel"
-            checked={isChecked.hotel}
-            onChange={toggleCheckbox}
-          />
-        </Form.Group>
-        <Form.Group className="ml-5">
-          <Form.Label>Train</Form.Label>
-          <br />
-          <Form.Check
-            type="checkbox"
-            name="train"
-            checked={isChecked.train}
-            onChange={toggleCheckbox}
-          />
-        </Form.Group>
-        <Form.Group className="ml-5">
-          <Form.Label>Cabs</Form.Label>
-          <br />
-          <Form.Check
-            type="checkbox"
-            name="cab"
-            checked={isChecked.cab}
-            onChange={toggleCheckbox}
-          />
-        </Form.Group>
-        <Button type="submit" variant="primary" className="mx-3 my-5">
-          Done
-        </Button>
-      </Form.Row>
-    </Form>
+    <Form.Row>
+      <Form.Group as={Col} className="Journey__source">
+        <Form.Label>From</Form.Label>
+        <br />
+        <Form.Control
+          as="select"
+          className="Journey__source__name"
+          name="source"
+          value={entry.source}
+          onChange={(e) => handleChange(e, index)}
+          size="lg"
+        >
+          <option>Mumbai</option>
+          <option>Delhi</option>
+          <option>Bangalore</option>
+        </Form.Control>
+        <br />
+      </Form.Group>
+      <Form.Group as={Col} className="Journey__destination">
+        <Form.Label>To</Form.Label>
+        <br />
+        <Form.Control
+          as="select"
+          className="Journey__destination__name"
+          name="destination"
+          value={entry.destination}
+          onChange={(e) => handleChange(e, index)}
+          size="lg"
+        >
+          <option>Mumbai</option>
+          <option>Delhi</option>
+          <option>Bangalore</option>
+        </Form.Control>
+        <br />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Departure</Form.Label>
+        <br />
+        <DatePicker
+          dateFormat="dd/MM/yyyy"
+          selected={entry.departure}
+          onChange={(date: Date) => handleDate(date, index)}
+        />
+      </Form.Group>
+      <Form.Group className="ml-5">
+        <Form.Label>Hotel</Form.Label>
+        <br />
+        <Form.Check
+          type="checkbox"
+          name="hotel"
+          checked={entry.hotel}
+          onChange={(e) => handleChange(e, index)}
+        />
+      </Form.Group>
+      <Form.Group className="ml-5">
+        <Form.Label>Train</Form.Label>
+        <br />
+        <Form.Check
+          type="checkbox"
+          name="train"
+          checked={entry.train}
+          onChange={(e) => handleChange(e, index)}
+        />
+      </Form.Group>
+      <Form.Group className="ml-5">
+        <Form.Label>Cabs</Form.Label>
+        <br />
+        <Form.Check
+          type="checkbox"
+          name="cab"
+          checked={entry.cab}
+          onChange={(e) => handleChange(e, index)}
+        />
+      </Form.Group>
+    </Form.Row>
   );
 };
 
