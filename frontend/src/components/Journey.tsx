@@ -113,17 +113,15 @@ const Journey: React.FC<Props> = (props) => {
         <UserDetails user={{ ...userDetails }} handleUser={handleUser} />
         <br />
         {entry1.map((entry, i) => (
-          <>
-            <JourneyEntry
-              key={uuidv4()}
-              entry={entry}
-              index={i}
-              handleChange={handleChange}
-              handleDate={handleDate}
-              toggleCheckBox={toggleCheckBox}
-              createEntry={createEntry}
-            />
-          </>
+          <JourneyEntry
+            key={uuidv4()}
+            entry={entry}
+            index={i}
+            handleChange={handleChange}
+            handleDate={handleDate}
+            toggleCheckBox={toggleCheckBox}
+            createEntry={createEntry}
+          />
         ))}
 
         <div className="Journey__submit">
