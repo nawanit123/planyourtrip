@@ -20,9 +20,22 @@ interface JourneyEntryType {
   cab: boolean | null;
 }
 
+interface UserInformationType {
+  name: string;
+  address: string;
+  contactNumber: string;
+  email: string;
+}
+
 const submitHandler = () => {};
 
 const Journey: React.FC<Props> = (props) => {
+  const [userDetails, setUserDetails] = useState<UserInformationType>({
+    name: '',
+    address: '',
+    contactNumber: '',
+    email: '',
+  });
   const [entry1, setEntry1] = useState<JourneyEntryType[]>([
     {
       source: 'Mumbai',
@@ -82,13 +95,22 @@ const Journey: React.FC<Props> = (props) => {
     });
   };
 
+  const handleUser = (e: any) => {
+    setUserDetails((prevState: any) => {
+      return {
+        ...prevState,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
   return (
     <Jumbotron className="Journey">
       <h1>Journey Planning</h1>
       <br />
 
       <Form className="Journey__form" onSubmit={submitHandler}>
-        <UserDetails />
+        <UserDetails user={{ ...userDetails }} handleUser={handleUser} />
         <br />
         {entry1.map((entry, i) => (
           <>
