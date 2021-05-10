@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Form, Jumbotron } from 'react-bootstrap';
 import './Journey.scss';
 import JourneyEntry from '../components/JourneyEntry';
+import UserDetails from './UserDetails';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
   children?: React.ReactNode;
@@ -11,8 +13,10 @@ interface JourneyEntryType {
   source: string | null;
   destination: string | null;
   departure: Date | null;
+  travellers: number | 1;
   hotel: boolean | null;
   train: boolean | null;
+  flight: boolean | null;
   cab: boolean | null;
 }
 
@@ -24,49 +28,45 @@ const Journey: React.FC<Props> = (props) => {
       source: 'Mumbai',
       destination: 'Bangalore',
       departure: new Date(),
+      travellers: 1,
       hotel: false,
       train: false,
-      cab: false,
-    },
-    {
-      source: 'Mumbai',
-      destination: 'Bangalore',
-      departure: new Date(),
-      hotel: false,
-      train: false,
-      cab: false,
-    },
-    {
-      source: 'Mumbai',
-      destination: 'Bangalore',
-      departure: new Date(),
-      hotel: false,
-      train: false,
-      cab: false,
-    },
-    {
-      source: 'Mumbai',
-      destination: 'Bangalore',
-      departure: new Date(),
-      hotel: false,
-      train: false,
-      cab: false,
-    },
-    {
-      source: 'Mumbai',
-      destination: 'Bangalore',
-      departure: new Date(),
-      hotel: false,
-      train: false,
+      flight: false,
       cab: false,
     },
   ]);
+
+  const createEntry = () => {
+    setEntry1([
+      ...entry1,
+      {
+        source: '',
+        destination: '',
+        departure: new Date(),
+        travellers: 1,
+        hotel: false,
+        train: false,
+        flight: false,
+        cab: false,
+      },
+    ]);
+  };
 
   const handleChange = (e: any, i: number) => {
     setEntry1((prevState: any) => {
       prevState[i] = {
         ...prevState[i],
         [e.target.name]: e.target.value,
+      };
+      return [...prevState];
+    });
+  };
+  const toggleCheckBox = (e: any, i: number) => {
+    let value: any = entry1[i];
+    setEntry1((prevState: any) => {
+      prevState[i] = {
+        ...prevState[i],
+        [e.target.name]: !value[e.target.name],
       };
       return [...prevState];
     });
@@ -84,20 +84,31 @@ const Journey: React.FC<Props> = (props) => {
 
   return (
     <Jumbotron className="Journey">
-      {console.log(entry1)}
       <h1>Journey Planning</h1>
       <br />
-      <Form onSubmit={submitHandler}>
+
+      <Form className="Journey__form" onSubmit={submitHandler}>
+        <UserDetails />
+        <br />
         {entry1.map((entry, i) => (
-          <JourneyEntry
-            entry={entry}
-            index={i}
-            handleChange={handleChange}
-            handleDate={handleDate}
-          />
+          <>
+            <JourneyEntry
+              key={uuidv4()}
+              entry={entry}
+              index={i}
+              handleChange={handleChange}
+              handleDate={handleDate}
+              toggleCheckBox={toggleCheckBox}
+              createEntry={createEntry}
+            />
+          </>
         ))}
 
-        <Button type="submit">Submit</Button>
+        <div className="Journey__submit">
+          <Button size="lg" type="submit">
+            Submit
+          </Button>
+        </div>
       </Form>
     </Jumbotron>
   );

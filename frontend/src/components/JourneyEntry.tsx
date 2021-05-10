@@ -1,13 +1,16 @@
 import React from 'react';
-import { Col, Form } from 'react-bootstrap';
+import { Button, Col, Form } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import './JourneyEntry.scss';
 
 interface Props {
   entry: any;
   index: number;
   handleChange: Function;
   handleDate: Function;
+  toggleCheckBox: Function;
+  createEntry: Function;
 }
 
 const JourneyEntry: React.FC<Props> = ({
@@ -15,10 +18,12 @@ const JourneyEntry: React.FC<Props> = ({
   index,
   handleChange,
   handleDate,
+  toggleCheckBox,
+  createEntry,
 }) => {
   return (
-    <Form.Row>
-      <Form.Group as={Col} className="Journey__source">
+    <Form.Row className="JourneyEntry">
+      <Form.Group as={Col} className="JourneyEntry__source">
         <Form.Label>From</Form.Label>
         <br />
         <Form.Control
@@ -35,7 +40,7 @@ const JourneyEntry: React.FC<Props> = ({
         </Form.Control>
         <br />
       </Form.Group>
-      <Form.Group as={Col} className="Journey__destination">
+      <Form.Group as={Col} className="JourneyEntry__destination">
         <Form.Label>To</Form.Label>
         <br />
         <Form.Control
@@ -61,6 +66,18 @@ const JourneyEntry: React.FC<Props> = ({
           onChange={(date: Date) => handleDate(date, index)}
         />
       </Form.Group>
+      <Form.Group className="ml-3">
+        <Form.Label>Travellers</Form.Label>
+        <Form.Control
+          type="number"
+          name="travellers"
+          placeholder="No. of passengers"
+          size="lg"
+          value={entry.travellers}
+          onChange={(e) => handleChange(e, index)}
+        />
+      </Form.Group>
+
       <Form.Group className="ml-5">
         <Form.Label>Hotel</Form.Label>
         <br />
@@ -68,7 +85,8 @@ const JourneyEntry: React.FC<Props> = ({
           type="checkbox"
           name="hotel"
           checked={entry.hotel}
-          onChange={(e) => handleChange(e, index)}
+          value={entry.hotel}
+          onChange={(e) => toggleCheckBox(e, index)}
         />
       </Form.Group>
       <Form.Group className="ml-5">
@@ -78,7 +96,19 @@ const JourneyEntry: React.FC<Props> = ({
           type="checkbox"
           name="train"
           checked={entry.train}
-          onChange={(e) => handleChange(e, index)}
+          value={entry.train}
+          onChange={(e) => toggleCheckBox(e, index)}
+        />
+      </Form.Group>
+      <Form.Group className="ml-5">
+        <Form.Label>Flight</Form.Label>
+        <br />
+        <Form.Check
+          type="checkbox"
+          name="flight"
+          checked={entry.flight}
+          value={entry.flight}
+          onChange={(e) => toggleCheckBox(e, index)}
         />
       </Form.Group>
       <Form.Group className="ml-5">
@@ -88,8 +118,18 @@ const JourneyEntry: React.FC<Props> = ({
           type="checkbox"
           name="cab"
           checked={entry.cab}
-          onChange={(e) => handleChange(e, index)}
+          value={entry.cab}
+          onChange={(e) => toggleCheckBox(e, index)}
         />
+      </Form.Group>
+      <Form.Group className="ml-5 JourneyEntry__add">
+        <Button
+          variant="outline-primary"
+          size="lg"
+          onClick={() => createEntry()}
+        >
+          Add entry
+        </Button>
       </Form.Group>
     </Form.Row>
   );

@@ -7,7 +7,7 @@ const Content: React.FC = () => {
   return (
     <div className="Content">
       <VerticalNav />
-      <Journey></Journey>
+      <Journey />
     </div>
   );
 };
