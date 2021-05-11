@@ -29,7 +29,7 @@
   }
 
   &::-webkit-scrollbar {
-    width: 1rem;
+    width: 0.25rem;
   }
 
   &::-webkit-scrollbar-track {
@@ -45,11 +45,11 @@
 
   &::-webkit-scrollbar-track-piece:end {
     background: transparent;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
   }
 
   &::-webkit-scrollbar-track-piece:start {
     background: transparent;
-    margin-top: 30px;
+    margin-top: 35px;
   }
 }
