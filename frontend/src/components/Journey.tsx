@@ -4,6 +4,7 @@ import './Journey.scss';
 import JourneyEntry from '../components/JourneyEntry';
 import UserDetails from './UserDetails';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 interface Props {
   children?: React.ReactNode;
@@ -27,8 +28,6 @@ interface UserInformationType {
   email: string;
 }
 
-const submitHandler = () => {};
-
 const Journey: React.FC<Props> = (props) => {
   const [userDetails, setUserDetails] = useState<UserInformationType>({
     name: '',
@@ -48,6 +47,21 @@ const Journey: React.FC<Props> = (props) => {
       cab: false,
     },
   ]);
+
+  const submitHandler = async (e: any) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    let result = await axios.post(
+      '/api/journey',
+      { userDetails, journeyDetails: { ...entry1 } },
+      config
+    );
+    console.log(result);
+  };
 
   const createEntry = () => {
     setEntry1([

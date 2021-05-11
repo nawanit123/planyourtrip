@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 
 export const getJourneyData = async (req: Request, res: Response) => {
-  const { name, address, contactNumber, email } = req.body;
+  const { userDetails, journeyDetails } = req.body;
+  const { name, address, contactNumber, email } = userDetails;
 
   console.log({
     name,
@@ -9,4 +10,5 @@ export const getJourneyData = async (req: Request, res: Response) => {
     contactNumber,
     email,
   });
+  console.log(journeyDetails);
 };
